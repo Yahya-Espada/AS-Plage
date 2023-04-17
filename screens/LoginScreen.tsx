@@ -116,6 +116,7 @@ import {
           </TouchableOpacity>
   
           <TouchableOpacity
+            onPress={() => navigate("HomePage")}
             style={{
               padding: Spacing * 2,
               backgroundColor: Colors.primary,
