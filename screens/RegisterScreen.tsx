@@ -16,18 +16,22 @@ import {
   import { NativeStackScreenProps } from "@react-navigation/native-stack";
   import { RootStackParamList } from "../types";
   import AppTextInput from "../components/AppTextInput";
+  import {Picker} from '@react-native-picker/picker';
+
   
   type Props = NativeStackScreenProps<RootStackParamList, "Register">;
 
   
   const RegisterScreen: React.FC<Props> = ({ navigation: { navigate } }) => {
+    const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
     const [emailError, setEmailError] = useState("");
     const [passwordError, setPasswordError] = useState("");
     const [confirmPasswordError, setConfirmPasswordError] = useState("");
-  
+    const [role, setRole] = useState('citoyen');
+    
     const validateEmail = (text: string) => {
       // basic email validation
       const emailRegex = /^\S+@\S+\.\S+$/;
@@ -58,12 +62,20 @@ import {
       }
       setConfirmPassword(text);
     };
+    
   
     const handleRegister = () => {
       if (!emailError && !passwordError && !confirmPasswordError) {
-        // submit registration data
+        const userData = {
+          email,
+          password,
+          username,
+          role
+        };
+        // submit registration data using the userData object
       }
     };
+    
     
     return (
       <SafeAreaView>
@@ -73,6 +85,7 @@ import {
               padding: Spacing * 1.5,
               marginTop: 10,
             }}
+            
           >
             <View
               style={{
@@ -87,7 +100,7 @@ import {
                   marginVertical: Spacing * 2,
                 }}
               >
-                Create account
+                Créer un compte
               </Text>
               <Text
                 style={{
@@ -97,7 +110,7 @@ import {
                   textAlign: "center",
                 }}
               >
-                Create your account today and gain access to all the benefits and features of our platform!
+                Créez votre compte aujourd'hui et accédez à tous les avantages et fonctionnalités de notre plateforme !
               </Text>
             </View>
 
@@ -108,6 +121,11 @@ import {
                 marginVertical: Spacing * 2,
               }}
           >
+                <AppTextInput
+                  placeholder="Username"
+                  onChangeText={(text) => setUsername(text)}
+                  value={username}
+                />
                 <AppTextInput
                   placeholder="Email"
                   onChangeText={validateEmail}
@@ -125,6 +143,26 @@ import {
                   error={confirmPasswordError}
                   secureTextEntry
                 />
+
+                <Picker  
+                style={{
+                padding: Spacing * 3.2,
+                backgroundColor: Colors.lightPrimary,
+                marginVertical: Spacing ,
+                }}
+                  selectedValue={role}
+                  onValueChange={(itemValue, itemIndex) =>
+                    setRole(itemValue)
+                  }>
+                  <Picker.Item label="Citoyen" value="citoyen" />
+                  <Picker.Item label="Locataire" value="locataire" />
+                  <Picker.Item
+                    label="Agent Municipalite"
+                    value="agent_municipalite"
+                  />
+                </Picker>
+                
+
           </View>
 
     
@@ -168,8 +206,8 @@ import {
                   textAlign: "center",
                   fontSize: FontSize.small,
                 }}
-              >
-                Already have an account
+              >   
+              Déjà un compte
               </Text>
             </TouchableOpacity>
     
@@ -185,8 +223,8 @@ import {
                   textAlign: "center",
                   fontSize: FontSize.small,
                 }}
-              >
-                Or continue with
+              >             
+                Ou continuer avec
               </Text>
     
               <View

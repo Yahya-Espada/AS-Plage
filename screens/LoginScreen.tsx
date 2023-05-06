@@ -26,28 +26,39 @@ import {
     const [emailError, setEmailError] = useState("");
     const [passwordError, setPasswordError] = useState("");
       
-    const validateEmail = (text: string) => {
-      // basic email validation
-      const emailRegex = /^\S+@\S+\.\S+$/;
-      if (!emailRegex.test(text)) {
-        setEmailError("Invalid email");
-      } else {
-        setEmailError("");
-      }
-      setEmail(text);
-    };
-  
-    const validatePassword = (text: string) => {
-      // password must contain at least one number, and be at least 8 characters long
-      const passwordRegex = /^(?=.*\d)[a-zA-Z\d]{8,}$/;
-      if (!passwordRegex.test(text)) {
-        setPasswordError("password must contain at least one number, and be at least 8 characters long");
-      } else {
-        setPasswordError("");
-      }
-      setPassword(text);
-    };
-  
+  const validateEmail = (text: string) => {
+    // basic email validation
+    const emailRegex = /^\S+@\S+\.\S+$/;
+    if (!emailRegex.test(text)) {
+      setEmailError("Invalid email");
+    } else {
+      setEmailError("");
+    }
+    setEmail(text);
+  };
+
+  const validatePassword = (text: string) => {
+    // password must contain at least one number, and be at least 8 characters long
+    const passwordRegex = /^(?=.*\d)[a-zA-Z\d]{8,}$/;
+    if (!passwordRegex.test(text)) {
+      setPasswordError(
+        "password must contain at least one number, and be at least 8 characters long"
+      );
+    } else {
+      setPasswordError("");
+    }
+    setPassword(text);
+  };
+
+  const handleLogin = async () => {
+    try {
+      const response = await fetch("http://localhost:3000/personne");
+      const data = await response.json();
+      console.log(data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
     return (
       <SafeAreaView style={{ flex: 1 }}>
@@ -71,7 +82,7 @@ import {
                 marginVertical: Spacing * 3,
               }}
             >
-              Login here
+              Connectez-vous 
             </Text>
             <Text
               style={{
@@ -81,7 +92,7 @@ import {
                 textAlign: "center",
               }}
             >
-              Welcome back you've been missed!
+              Content de vous revoir, vous avez manqué !
             </Text>
           </View>
           <View
@@ -111,7 +122,7 @@ import {
                 alignSelf: "flex-end",
               }}
             >
-              Forgot your password ?
+              Mot de passe oublié ?
             </Text>
           </TouchableOpacity>
   
@@ -156,7 +167,7 @@ import {
                 fontSize: FontSize.small,
               }}
             >
-              Create new account
+              Créer un nouveau compte
             </Text>
           </TouchableOpacity>
   
@@ -173,7 +184,7 @@ import {
                 fontSize: FontSize.small,
               }}
             >
-              Or continue with
+              Ou continuer avec
             </Text>
   
             <View

@@ -2,6 +2,7 @@ import {
     Dimensions,
     ImageBackground,
     SafeAreaView,
+    ScrollView,
     StyleSheet,
     Text,
     TouchableOpacity,
@@ -15,18 +16,6 @@ import {
   import { NativeStackScreenProps } from "@react-navigation/native-stack";
   import { RootStackParamList } from "../types";
  
- /* import { SQLite } from 'expo-sqlite';
-  import { Pool } from 'pg';
-
-  const pool = new Pool({
-    host: 'your-hostname',
-    port: 'your-port',
-    database: 'your-database-name',
-    user: 'your-username',
-    password: 'your-password',
-  }); */
-  
-
 
 
   const { height } = Dimensions.get("window");
@@ -40,6 +29,7 @@ import {
         flex:1,
         marginTop: 20,
       }}>
+        <ScrollView>
         <View>
           <ImageBackground
             style={{
@@ -53,7 +43,7 @@ import {
           <View
             style={{
               paddingHorizontal: Spacing * 3,
-              paddingTop: Spacing * 2,
+              paddingTop: Spacing * 1.3,
             }}
           >
             <Text
@@ -64,7 +54,7 @@ import {
                 textAlign: "center",
               }}
             >
-              Discover the best car parks and beaches around you
+              Découvrez les meilleurs parkings et plages autour de vous.
             </Text>
   
             <Text
@@ -73,10 +63,11 @@ import {
                 color: Colors.text,
                 fontFamily: Font["poppins-regular"],
                 textAlign: "center",
-                marginTop: Spacing * 2,
+                marginTop: Spacing * 3,
               }}
             >
-              Eliminate beach visit stress with our app, reserve spots hassle-free, and stay updated in real-time to secure your preferred location.
+              
+              Éliminez le stress de la visite de la plage avec notre application, réservez des places sans tracas et restez à jour en temps réel pour sécuriser votre emplacement préféré.
             </Text>
           </View>
           <View
@@ -137,6 +128,7 @@ import {
             </TouchableOpacity>
           </View>
         </View>
+        </ScrollView>
       </SafeAreaView>
     );
   };
